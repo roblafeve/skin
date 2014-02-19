@@ -1,0 +1,4 @@
+.button,.box,.error,.widget{border-radius:6px;border-width:1px;border-style:solid}
+.button,.box{background-color:#ccc;border-color:#b3b3b3;color:#4d4d4d;background-image:linear-gradient(rgba(255,255,255,0.1),rgba(0,0,0,0.1))}
+.error{background-color:#800080;border-color:#4d004d;color:#ff80ff;}
+.widget{background-color:#ffa500;border-color:#cc8400;color:#ffdb99;}

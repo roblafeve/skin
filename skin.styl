@@ -1,0 +1,113 @@
+color-base      = #ccc
+color-primary   = teal
+color-secondary = purple
+color-tertiary  = orange
+
+// SKIN CONFIGURATION
+// To apply a skin to an element, use `@extend $skin-name`.
+// To utilize a skin variant, `@extend $skin-name-variant`.
+
+// SKIN BASE
+skin-base = {
+  
+  border-radius: 6px
+  border-width:  1px
+  border-style:  solid
+
+}
+
+defaults = {
+
+  // BACKGROUND 
+  background_color: color-base
+
+  // SKIN - BORDER
+  border_luminance: dark
+  border_contrast:  10
+
+  // SKIN - BORDER
+  text_luminance:   dark
+  text_contrast:    50
+
+
+}
+
+// SKINS
+skin = {
+
+  primary: {
+
+    // SKIN - UNIQUE
+    attributes: {
+      background-image: linear-gradient(rgba(white, 0.1), rgba(black, 0.1))
+    }
+
+  }
+
+  secondary: {
+
+    // SKIN - BACKGROUND
+    background_color: color-secondary
+
+    // SKIN - BORDER
+    border_luminance: dark
+    border_contrast:  10
+
+    // SKIN - BORDER
+    text_luminance:   light
+    text_contrast:    50
+
+  }
+
+  tertiary: {
+
+    // SKIN - BACKGROUND
+    background_color: color-tertiary
+
+    // SKIN - BORDER
+    border_luminance: dark
+    border_contrast:  10
+
+    // SKIN - BORDER
+    text_luminance:   light
+    text_contrast:    30
+
+  }
+
+}
+
+// GENERATE SKIN BASE
+$skin-base
+  for key, value in skin-base
+    {key}: value
+
+// GENERATE SKINS
+for name, value in skin
+  merged             = merge({}, defaults, skin[name])
+  background_color   = merged['background_color']
+  border_luminance   = merged['border_luminance']
+  border_contrast    = merged['border_contrast']
+  text_luminance     = merged['text_luminance']
+  text_contrast      = merged['text_contrast']
+  attributes         = merged.attributes
+  $skin-{name}
+    @extend $skin-base
+    background-color background_color
+    border-color     lighten(background_color, border_contrast) if border_luminance is light
+    border-color     darken(background_color, border_contrast) if border_luminance is dark
+    color            lighten(background_color, text_contrast) if text_luminance is light
+    color            darken(background_color, text_contrast) if text_luminance is dark
+    for key, value in attributes
+      {key}: value if attributes
+
+.button
+  @extend $skin-primary
+
+.box
+  @extend $skin-primary
+
+.error
+  @extend $skin-secondary
+
+.widget
+  @extend $skin-tertiary
