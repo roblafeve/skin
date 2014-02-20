@@ -1,89 +1,57 @@
-color-base      = #ccc
+color-base      = whitesmoke
 color-primary   = teal
 color-secondary = purple
 color-tertiary  = orange
 
 // SKIN CONFIGURATION
 // To apply a skin to an element, use `@extend $skin-name`.
-// To utilize a skin variant, `@extend $skin-name-variant`.
+// To utilize a skin variant, `@extend $skin-name-variant` (not in place currently).
 
 // SKIN BASE
-skin-base = {
-  
-  border-radius: 6px
-  border-width:  1px
-  border-style:  solid
-
+// Shared CSS should be placed inside `skin_base` and will be extend by each `skin`.
+// Do not confuse with `defaults`.
+skin_base = {
+  border-width:      1px
+  border-style:      solid
+  background-repeat: no-repeat
+  transition:        all 0.25s ease-in-out
+  background-image:  linear-gradient(rgba(white, 0), rgba(black, 0.05))
 }
 
-defaults = {
-
-  // BACKGROUND 
+// SKIN DEFAULT
+// Default skin configuration options are placed in `skin_default`.
+// Unless specified on a specific `skin`, these options are used.
+skin_default = {
   background_color: color-base
-
-  // SKIN - BORDER
   border_luminance: dark
   border_contrast:  10
-
-  // SKIN - BORDER
-  text_luminance:   dark
+  text_luminance:   light
   text_contrast:    50
-
-
 }
 
 // SKINS
 skin = {
-
   primary: {
-
-    // SKIN - UNIQUE
+    text_luminance: dark
     attributes: {
-      background-image: linear-gradient(rgba(white, 0.1), rgba(black, 0.1))
     }
-
   }
-
   secondary: {
-
-    // SKIN - BACKGROUND
     background_color: color-secondary
-
-    // SKIN - BORDER
-    border_luminance: dark
-    border_contrast:  10
-
-    // SKIN - BORDER
-    text_luminance:   light
-    text_contrast:    50
-
   }
-
   tertiary: {
-
-    // SKIN - BACKGROUND
     background_color: color-tertiary
-
-    // SKIN - BORDER
-    border_luminance: dark
-    border_contrast:  10
-
-    // SKIN - BORDER
-    text_luminance:   light
-    text_contrast:    30
-
   }
-
 }
 
 // GENERATE SKIN BASE
 $skin-base
-  for key, value in skin-base
+  for key, value in skin_base
     {key}: value
 
 // GENERATE SKINS
 for name, value in skin
-  merged             = merge({}, defaults, skin[name])
+  merged             = merge({}, skin_default, skin[name])
   background_color   = merged['background_color']
   border_luminance   = merged['border_luminance']
   border_contrast    = merged['border_contrast']
@@ -100,14 +68,22 @@ for name, value in skin
     for key, value in attributes
       {key}: value if attributes
 
-.button
+.thing-1
+  &:before
+    content 'Skin - ' attr(data-skin)
   @extend $skin-primary
 
-.box
-  @extend $skin-primary
-
-.error
+.thing-2
+  &:before
+    content 'Skin - ' attr(data-skin)
   @extend $skin-secondary
 
-.widget
+.thing-3
+  &:before
+    content 'Skin - ' attr(data-skin)
   @extend $skin-tertiary
+  &:hover
+    @extend $skin-primary
+
+body
+  @extend $skin-primary

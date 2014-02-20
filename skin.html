@@ -11,30 +11,27 @@
     body {
       margin: 0;
       padding: 1em;
+      text-align: center;
+      min-height: 100%;
+      width: 100%;
+      position: absolute;
     }
-    body > *:first-child {
+    body > div:first-child {
       margin-top: 0;
     }
-    body > * {
+    body > div {
       margin-top: 1em;
       padding: 1em;
-    }
-    .button {
-      display: inline-block
     }
   </style>
 </head>
 <body>
 
-  <div class="button">Button</div>
+  <h1>Skins</h1>
 
-  <div class="box">Box</div>
-
-  <div class="error">Box Error</div>
-
-  <div class="widget">Widget</div>
-
-  <div class="widget-header">Widget</div>
+  <div class="thing-1" data-skin="Primary"></div>
+  <div class="thing-2" data-skin="Secondary"></div>
+  <div class="thing-3" data-skin="Tertiary"></div>
   
 </body>
 </html>

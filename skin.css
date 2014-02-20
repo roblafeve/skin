@@ -1,4 +1,7 @@
-.button,.box,.error,.widget{border-radius:6px;border-width:1px;border-style:solid}
-.button,.box{background-color:#ccc;border-color:#b3b3b3;color:#4d4d4d;background-image:linear-gradient(rgba(255,255,255,0.1),rgba(0,0,0,0.1))}
-.error{background-color:#800080;border-color:#4d004d;color:#ff80ff;}
-.widget{background-color:#ffa500;border-color:#cc8400;color:#ffdb99;}
+.thing-1,.thing-2,.thing-3,.thing-3:hover,body{border-width:1px;border-style:solid;background-repeat:no-repeat;transition:all .25s ease-in-out;background-image:linear-gradient(rgba(255,255,255,0),rgba(0,0,0,0.05))}
+.thing-1,.thing-3:hover,body{background-color:#f5f5f5;border-color:#dcdcdc;color:#767676}
+.thing-2{background-color:#800080;border-color:#4d004d;color:#ff80ff;}
+.thing-3{background-color:#ffa500;border-color:#cc8400;color:#fff;}
+.thing-1:before{content:'Skin - ' attr(data-skin)}
+.thing-2:before{content:'Skin - ' attr(data-skin)}
+.thing-3:before{content:'Skin - ' attr(data-skin)}
