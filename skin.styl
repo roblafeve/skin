@@ -1,7 +1,7 @@
 color-base      = whitesmoke
 color-primary   = teal
-color-secondary = purple
-color-tertiary  = orange
+color-secondary = goldenrod
+color-tertiary  = yellowgreen
 
 // SKIN CONFIGURATION
 // To apply a skin to an element, use `@extend $skin-name`.
@@ -22,25 +22,35 @@ skin_base = {
 // Default skin configuration options are placed in `skin_default`.
 // Unless specified on a specific `skin`, these options are used.
 skin_default = {
-  background_color: color-base
+  base_color:       color-base
   border_luminance: dark
   border_contrast:  10
   text_luminance:   light
-  text_contrast:    50
+  text_contrast:    30
+  variant: {
+    light: {
+      base_color_adjust: 10
+      border_contrast:  5
+    }
+    dark: {
+      base_color_adjust: -10
+      border_contrast:  0
+    }
+  }
 }
 
 // SKINS
 skin = {
   primary: {
     text_luminance: dark
-    attributes: {
-    }
   }
   secondary: {
-    background_color: color-secondary
+    base_color: color-secondary
   }
   tertiary: {
-    background_color: color-tertiary
+    base_color: color-tertiary
+    text_luminance: dark
+    text_contrast:  10
   }
 }
 
@@ -52,38 +62,85 @@ $skin-base
 // GENERATE SKINS
 for name, value in skin
   merged             = merge({}, skin_default, skin[name])
-  background_color   = merged['background_color']
+  base_color         = merged['base_color']
   border_luminance   = merged['border_luminance']
   border_contrast    = merged['border_contrast']
   text_luminance     = merged['text_luminance']
   text_contrast      = merged['text_contrast']
   attributes         = merged.attributes
+  variants           = merged.variant
   $skin-{name}
     @extend $skin-base
-    background-color background_color
-    border-color     lighten(background_color, border_contrast) if border_luminance is light
-    border-color     darken(background_color, border_contrast) if border_luminance is dark
-    color            lighten(background_color, text_contrast) if text_luminance is light
-    color            darken(background_color, text_contrast) if text_luminance is dark
+    background-color base_color
+    border-color     lighten(base_color, border_contrast) if border_luminance is light
+    border-color     darken(base_color, border_contrast) if border_luminance is dark
+    color            lighten(base_color, text_contrast) if text_luminance is light
+    color            darken(base_color, text_contrast) if text_luminance is dark
     for key, value in attributes
       {key}: value if attributes
 
-.thing-1
+  for variant, option in variants
+    variant_merged     = merge({}, merged, variants[variant])
+    base_color         = variant_merged['base_color']
+    border_luminance   = variant_merged['border_luminance']
+    border_contrast    = variant_merged['border_contrast']
+    text_luminance     = variant_merged['text_luminance']
+    text_contrast      = variant_merged['text_contrast']
+    attributes         = variant_merged['attributes']
+    variants           = variant_merged.variant
+    base_color_adjust  = option['base_color_adjust']
+    $skin-{name}-{variant}
+      @extend $skin-base
+      unless base_color_adjust
+        base_color_adjust = 0
+      if base_color_adjust >= 0
+        base_color = lighten(base_color, base_color_adjust)
+      else
+        base_color = darken(base_color, base_color_adjust*-1)
+      background-color base_color
+      border-color     lighten(base_color, border_contrast) if border_luminance is light
+      border-color     darken(base_color, border_contrast) if border_luminance is dark
+      color            lighten(base_color, text_contrast) if text_luminance is light
+      color            darken(base_color, text_contrast) if text_luminance is dark
+      for key, value in attributes
+        {key}: value if attributes
+
+
+.thing-1a
+  &:before
+    content 'Skin - ' attr(data-skin)
+  @extend $skin-primary-light
+.thing-1b
   &:before
     content 'Skin - ' attr(data-skin)
   @extend $skin-primary
+.thing-1c
+  &:before
+    content 'Skin - ' attr(data-skin)
+  @extend $skin-primary-dark
 
-.thing-2
+.thing-2a
+  &:before
+    content 'Skin - ' attr(data-skin)
+  @extend $skin-secondary-light
+.thing-2b
   &:before
     content 'Skin - ' attr(data-skin)
   @extend $skin-secondary
+.thing-2c
+  &:before
+    content 'Skin - ' attr(data-skin)
+  @extend $skin-secondary-dark
 
-.thing-3
+.thing-3a
+  &:before
+    content 'Skin - ' attr(data-skin)
+  @extend $skin-tertiary-light
+.thing-3b
   &:before
     content 'Skin - ' attr(data-skin)
   @extend $skin-tertiary
-  &:hover
-    @extend $skin-primary
-
-body
-  @extend $skin-primary
+.thing-3c
+  &:before
+    content 'Skin - ' attr(data-skin)
+  @extend $skin-tertiary-dark
