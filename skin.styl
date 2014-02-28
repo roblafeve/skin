@@ -19,30 +19,27 @@ $skin-base
 // Figure out how to pass options so that it doesn't break!
 default = {
   color_base: whitesmoke
-  border_adjust: -5
-  text_adjust: -30
+  border_adjust: -10
+  text_adjust: -20
   variants: {
     light: {
-      border_adjust: 20
-      color_adjust: 40
+      color_adjust: 10
     }
     dark: {
-      color_adjust: -5
-      border_adjust: -5
-      text_adjust: 50
+      color_adjust: -10
     }
   }
 }
 
 skins = {
   primary: {
-    color_base: orange
   }
   secondary: {
-    color_base: teal
+    color_base: orange
   }
   tertiary: {
-    color_base: green
+    color_base: #444
+    text_adjust: 20
   }
 }
 
@@ -63,13 +60,14 @@ for skin_name, skin in skins
     border_adjust = skin_options.border_adjust
     text_adjust   = skin_options.text_adjust
     
-    // BACKGROUND COLOR
+    // ADJUST COLOR BASE
     if color_adjust && color_adjust > 0
-      background-color lighten(color_base, color_adjust)
+      color_base  = lighten(color_base, color_adjust)
     else if color_adjust && color_adjust < 0
-      background-color darken(color_base, color_adjust*-1)
-    else
-      background-color color_base
+      color_base  = darken(color_base, color_adjust*-1)
+    
+    // BACKGROUND COLOR
+    background-color color_base
 
     // BORDER COLOR
     if border_adjust && border_adjust > 0
@@ -104,13 +102,14 @@ for skin_name, skin in skins
       border_adjust    = variant_options['border_adjust']
       text_adjust      = variant_options['text_adjust']
       
-      // BACKGROUND COLOR
+      // ADJUST COLOR BASE
       if color_adjust && color_adjust > 0
-        background-color lighten(color_base, color_adjust)
+        color_base  = lighten(color_base, color_adjust)
       else if color_adjust && color_adjust < 0
-        background-color darken(color_base, color_adjust*-1)
-      else
-        background-color color_base
+        color_base  = darken(color_base, color_adjust*-1)
+      
+      // BACKGROUND COLOR
+      background-color color_base
 
       // BORDER COLOR
       if border_adjust && border_adjust > 0
@@ -131,8 +130,6 @@ for skin_name, skin in skins
       skin_attributes    = merge({}, default.attributes, skin.attributes)
       variant_attributes = merge({}, skin_attributes, variants[variant_name].attributes, variant.attributes)
       print(variant_attributes)
-
-
 
 
 .thing-1a
