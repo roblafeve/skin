@@ -1,109 +1,138 @@
-color-base      = whitesmoke
-color-primary   = teal
-color-secondary = goldenrod
-color-tertiary  = yellowgreen
-
 // SKIN CONFIGURATION
 // To apply a skin to an element, use `@extend $skin-name`.
-// To utilize a skin variant, `@extend $skin-name-variant` (not in place currently).
+// To utilize a skin variant, `@extend $skin-name-variant`.
 
 // SKIN BASE
 // Shared CSS should be placed inside `skin_base` and will be extend by each `skin`.
 // Do not confuse with `defaults`.
-skin_base = {
-  border-width:      1px
-  border-style:      solid
-  background-repeat: no-repeat
-  transition:        all 0.25s ease-in-out
-  background-image:  linear-gradient(rgba(white, 0), rgba(black, 0.05))
-}
+$skin-base
+  border-width      1px
+  border-style      solid
+  background-repeat no-repeat
+  transition        all 0.25s ease-in-out
+  // background-image  linear-gradient(rgba(white, 0), rgba(black, 0.05))
 
 // SKIN DEFAULT
 // Default skin configuration options are placed in `skin_default`.
 // Unless specified on a specific `skin`, these options are used.
-skin_default = {
-  base_color:       color-base
-  border_luminance: dark
-  border_contrast:  10
-  text_luminance:   light
-  text_contrast:    30
-  variant: {
+// THIS ONE WORKS!!! 
+// Figure out how to pass options so that it doesn't break!
+default = {
+  color_base: whitesmoke
+  border_adjust: -5
+  text_adjust: -30
+  variants: {
     light: {
-      base_color_adjust: 10
-      border_contrast:  5
+      border_adjust: 20
+      color_adjust: 40
     }
     dark: {
-      base_color_adjust: -10
-      border_contrast:  0
+      color_adjust: -5
+      border_adjust: -5
+      text_adjust: 50
     }
   }
 }
 
-// SKINS
-skin = {
+skins = {
   primary: {
-    text_luminance: dark
+    color_base: orange
   }
   secondary: {
-    base_color: color-secondary
+    color_base: teal
   }
   tertiary: {
-    base_color: color-tertiary
-    text_luminance: dark
-    text_contrast:  10
+    color_base: green
   }
 }
 
-// GENERATE SKIN BASE
-$skin-base
-  for key, value in skin_base
-    {key}: value
+print(z)
+  for x, y in z
+    unless typeof(y) is 'object'
+      {x} y
 
-// GENERATE SKINS
-for name, value in skin
-  merged             = merge({}, skin_default, skin[name])
-  base_color         = merged['base_color']
-  border_luminance   = merged['border_luminance']
-  border_contrast    = merged['border_contrast']
-  text_luminance     = merged['text_luminance']
-  text_contrast      = merged['text_contrast']
-  attributes         = merged.attributes
-  variants           = merged.variant
-  $skin-{name}
+for skin_name, skin in skins
+
+  // SKIN TEMPLATE
+  $skin-{skin_name}
     @extend $skin-base
-    background-color base_color
-    border-color     lighten(base_color, border_contrast) if border_luminance is light
-    border-color     darken(base_color, border_contrast) if border_luminance is dark
-    color            lighten(base_color, text_contrast) if text_luminance is light
-    color            darken(base_color, text_contrast) if text_luminance is dark
-    for key, value in attributes
-      {key}: value if attributes
+    // SKIN OPTIONS
+    skin_options  = merge({}, default, skin)
+    color_base    = skin_options.color_base
+    color_adjust  = skin_options.color_adjust
+    border_adjust = skin_options.border_adjust
+    text_adjust   = skin_options.text_adjust
+    
+    // BACKGROUND COLOR
+    if color_adjust && color_adjust > 0
+      background-color lighten(color_base, color_adjust)
+    else if color_adjust && color_adjust < 0
+      background-color darken(color_base, color_adjust*-1)
+    else
+      background-color color_base
 
-  for variant, option in variants
-    variant_merged     = merge({}, merged, variants[variant])
-    base_color         = variant_merged['base_color']
-    border_luminance   = variant_merged['border_luminance']
-    border_contrast    = variant_merged['border_contrast']
-    text_luminance     = variant_merged['text_luminance']
-    text_contrast      = variant_merged['text_contrast']
-    attributes         = variant_merged['attributes']
-    variants           = variant_merged.variant
-    base_color_adjust  = option['base_color_adjust']
-    $skin-{name}-{variant}
+    // BORDER COLOR
+    if border_adjust && border_adjust > 0
+      border-color lighten(color_base, border_adjust)
+    else if border_adjust && border_adjust < 0
+      border-color darken(color_base, border_adjust*-1)
+    else
+      border-color color_base
+
+    // TEXT COLOR
+    if text_adjust && text_adjust > 0
+      color lighten(color_base, text_adjust)
+    else if text_adjust && text_adjust < 0
+      color darken(color_base, text_adjust*-1)
+    else
+      color color_base
+
+    skin_attributes = merge({}, default.attributes, skin.attributes)
+    print(skin_attributes)
+
+  // merged_variants = merge({}, variant, default.variants)
+  variants = merge({}, default.variants, skin.variants)
+  for variant_name, variant in variants
+
+    $skin-{skin_name}-{variant_name}
       @extend $skin-base
-      unless base_color_adjust
-        base_color_adjust = 0
-      if base_color_adjust >= 0
-        base_color = lighten(base_color, base_color_adjust)
+      
+      skin_options     = merge({}, default, skin)
+      variant_options  = merge({}, skin_options, variants[variant], variant)
+      color_base       = variant_options['color_base']
+      color_adjust     = variant_options['color_adjust']
+      border_adjust    = variant_options['border_adjust']
+      text_adjust      = variant_options['text_adjust']
+      
+      // BACKGROUND COLOR
+      if color_adjust && color_adjust > 0
+        background-color lighten(color_base, color_adjust)
+      else if color_adjust && color_adjust < 0
+        background-color darken(color_base, color_adjust*-1)
       else
-        base_color = darken(base_color, base_color_adjust*-1)
-      background-color base_color
-      border-color     lighten(base_color, border_contrast) if border_luminance is light
-      border-color     darken(base_color, border_contrast) if border_luminance is dark
-      color            lighten(base_color, text_contrast) if text_luminance is light
-      color            darken(base_color, text_contrast) if text_luminance is dark
-      for key, value in attributes
-        {key}: value if attributes
+        background-color color_base
+
+      // BORDER COLOR
+      if border_adjust && border_adjust > 0
+        border-color lighten(color_base, border_adjust)
+      else if border_adjust && border_adjust < 0
+        border-color darken(color_base, border_adjust*-1)
+      else
+        border-color color_base
+
+      // TEXT COLOR
+      if text_adjust && text_adjust > 0
+        color lighten(color_base, text_adjust)
+      else if text_adjust && text_adjust < 0
+        color darken(color_base, text_adjust*-1)
+      else
+        color color_base
+      
+      skin_attributes    = merge({}, default.attributes, skin.attributes)
+      variant_attributes = merge({}, skin_attributes, variants[variant_name].attributes, variant.attributes)
+      print(variant_attributes)
+
+
 
 
 .thing-1a

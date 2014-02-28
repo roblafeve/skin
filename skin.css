@@ -1,19 +1,105 @@
-.thing-1a,.thing-1b,.thing-1c,.thing-2a,.thing-2b,.thing-2c,.thing-3a,.thing-3b,.thing-3c{border-width:1px;border-style:solid;background-repeat:no-repeat;transition:all .25s ease-in-out;background-image:linear-gradient(rgba(255,255,255,0),rgba(0,0,0,0.05))}
-.thing-1b{background-color:#f5f5f5;border-color:#dcdcdc;color:#a9a9a9;}
-.thing-1a{background-color:#fff;border-color:#f2f2f2;color:#b3b3b3;}
-.thing-1c{background-color:#dcdcdc;border-color:#c3c3c3;color:#909090;}
-.thing-2b{background-color:#daa520;border-color:#ae8319;color:#f1dba2;}
-.thing-2a{background-color:#e4b849;border-color:#e1af33;color:#f8ecce;}
-.thing-2c{background-color:#ae8319;border-color:#816113;color:#ebc975;}
-.thing-3b{background-color:#9acd05;border-color:#759b04;color:#759b04;}
-.thing-3a{background-color:#bdf90c;border-color:#ade606;color:#9acd05;}
-.thing-3c{background-color:#759b04;border-color:#4f6903;color:#4f6903;}
-.thing-1a:before{content:'Skin - ' attr(data-skin)}
-.thing-1b:before{content:'Skin - ' attr(data-skin)}
-.thing-1c:before{content:'Skin - ' attr(data-skin)}
-.thing-2a:before{content:'Skin - ' attr(data-skin)}
-.thing-2b:before{content:'Skin - ' attr(data-skin)}
-.thing-2c:before{content:'Skin - ' attr(data-skin)}
-.thing-3a:before{content:'Skin - ' attr(data-skin)}
-.thing-3b:before{content:'Skin - ' attr(data-skin)}
-.thing-3c:before{content:'Skin - ' attr(data-skin)}
+.thing-1a,
+.thing-1b,
+.thing-1c,
+.thing-2a,
+.thing-2b,
+.thing-2c,
+.thing-3a,
+.thing-3b,
+.thing-3c {
+  border-width: 1px;
+  border-style: solid;
+  background-repeat: no-repeat;
+  -webkit-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+}
+
+.thing-1b {
+  background-color: #ffa500;
+  border-color: #e69500;
+  color: #664200;
+}
+
+.thing-1a {
+  background-color: #ffedcc;
+  border-color: #ffc966;
+  color: #664200;
+}
+
+.thing-1c {
+  background-color: #e69500;
+  border-color: #e69500;
+  color: #fff;
+}
+
+.thing-2b {
+  background-color: #008080;
+  border-color: #006667;
+  color: #000;
+}
+
+.thing-2a {
+  background-color: #4dffff;
+  border-color: #00e6e6;
+  color: #000;
+}
+
+.thing-2c {
+  background-color: #006667;
+  border-color: #006667;
+  color: #80ffff;
+}
+
+.thing-3b {
+  background-color: #008000;
+  border-color: #006700;
+  color: #000;
+}
+
+.thing-3a {
+  background-color: #4dff4d;
+  border-color: #00e600;
+  color: #000;
+}
+
+.thing-3c {
+  background-color: #006700;
+  border-color: #006700;
+  color: #80ff80;
+}
+
+.thing-1a:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-1b:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-1c:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-2a:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-2b:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-2c:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-3a:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-3b:before {
+  content: 'Skin - ' attr(data-skin);
+}
+
+.thing-3c:before {
+  content: 'Skin - ' attr(data-skin);
+}
