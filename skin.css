@@ -1,19 +1,89 @@
-.thing-1a,.thing-1b,.thing-1c,.thing-2a,.thing-2b,.thing-2c,.thing-3a,.thing-3b,.thing-3c{border-width:1px;border-style:solid;background-repeat:no-repeat;transition:all .25s ease-in-out}
-.thing-1b{background-color:#f5f5f5;border-color:#dcdcdc;color:#c2c2c2;}
-.thing-1a{background-color:#fff;border-color:#e6e6e6;color:#ccc;}
-.thing-1c{background-color:#dcdcdc;border-color:#c3c3c3;color:#a9a9a9;}
-.thing-2b{background-color:#ffa500;border-color:#cc8400;color:#996300;}
-.thing-2a{background-color:#ffb733;border-color:#ffa500;color:#cc8400;}
-.thing-2c{background-color:#cc8400;border-color:#996300;color:#664200;}
-.thing-3b{background-color:#444;border-color:#2b2b2b;color:#777;}
-.thing-3a{background-color:#5e5e5e;border-color:#454545;color:#919191;}
-.thing-3c{background-color:#2b2b2b;border-color:#121212;color:#5e5e5e;}
-.thing-1a:before{content:'Skin - ' attr(data-skin)}
-.thing-1b:before{content:'Skin - ' attr(data-skin)}
-.thing-1c:before{content:'Skin - ' attr(data-skin)}
-.thing-2a:before{content:'Skin - ' attr(data-skin)}
-.thing-2b:before{content:'Skin - ' attr(data-skin)}
-.thing-2c:before{content:'Skin - ' attr(data-skin)}
-.thing-3a:before{content:'Skin - ' attr(data-skin)}
-.thing-3b:before{content:'Skin - ' attr(data-skin)}
-.thing-3c:before{content:'Skin - ' attr(data-skin)}
+.thing-1a,
+.thing-1b,
+.thing-1c,
+.thing-2a,
+.thing-2b,
+.thing-2c,
+.thing-3a,
+.thing-3b,
+.thing-3c {
+  border-width: 1px;
+  border-style: solid;
+  background-repeat: no-repeat;
+  transition: all 0.25s ease-in-out;
+}
+.thing-1b {
+  background-color: #f5f5f5;
+  border-color: #dcdcdc;
+  color: #dcdcdc;
+  top: 0;
+}
+.thing-1a {
+  background-color: #fff;
+  border-color: #e6e6e6;
+  color: #808080;
+}
+.thing-1c {
+  background-color: #dcdcdc;
+  border-color: #c3c3c3;
+  color: #c3c3c3;
+}
+.thing-2b {
+  background-color: #ffa500;
+  border-color: #cc8400;
+  color: #cc8400;
+  top: 0;
+}
+.thing-2a {
+  background-color: #ffc966;
+  border-color: #ffb733;
+  color: #664200;
+}
+.thing-2c {
+  background-color: #cc8400;
+  border-color: #996300;
+  color: #996300;
+}
+.thing-3b {
+  background-color: #333;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+  top: 0;
+}
+.thing-3a {
+  background-color: #666;
+  border-color: #4d4d4d;
+  color: #000;
+}
+.thing-3c {
+  background-color: #1a1a1a;
+  border-color: #000;
+  color: #000;
+}
+.thing-1a:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-1b:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-1c:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-2a:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-2b:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-2c:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-3a:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-3b:before {
+  content: 'Skin - ' attr(data-skin);
+}
+.thing-3c:before {
+  content: 'Skin - ' attr(data-skin);
+}

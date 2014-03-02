@@ -1,49 +1,38 @@
-// SKIN CONFIGURATION
-// To apply a skin to an element, use `@extend $skin-name`.
-// To utilize a skin variant, `@extend $skin-name-variant`.
-
-// SKIN BASE
-// Shared CSS should be placed inside `skin_base` and will be extend by each `skin`.
-// Do not confuse with `defaults`.
-$skin-base
-  border-width      1px
-  border-style      solid
-  background-repeat no-repeat
-  transition        all 0.25s ease-in-out
-  // background-image  linear-gradient(rgba(white, 0), rgba(black, 0.05))
-
-// SKIN DEFAULT
-// Default skin configuration options are placed in `skin_default`.
-// Unless specified on a specific `skin`, these options are used.
-// THIS ONE WORKS!!! 
-// Figure out how to pass options so that it doesn't break!
 skins = {
   default: {
-    color_base: whitesmoke
+    color_base: #777777
     color_adjust: 0
-    border_adjust: -10
-    text_adjust: -10
+    border_adjust: -20
+    text_adjust: 50
     attributes: {
       top: 0
     }
     variants: {
-      light: {
-        text_adjust: -50
+      alpha: {
         color_adjust: 20
       }
-      dark: {
+      beta: {
         color_adjust: -10
+      }
+      gamma: {
+        color_adjust: -20
       }
     }
   }
   primary: {
-    
+    color_base: purple
+    attributes: {
+      position: absolute
+    }
+    variants: {
+      light: {
+        color_adjust: 5
+      }
+      dark: {}
+    }
   }
   secondary: {
     color_base: orange
-  }
-  tertiary: {
-    color_base: #333
   }
 }
 
@@ -84,8 +73,7 @@ for skin_name, skin in skins
     else
       text_color = color_base
 
-    $skin-{skin_name}
-      @extend $skin-base
+    .skin-{skin_name}
 
       background-color background_color
       border-color border_color
@@ -95,8 +83,7 @@ for skin_name, skin in skins
         {attribute_name} attribute
 
     for variant_name, variant in merged_variants
-      $skin-{skin_name}-{variant_name}
-        @extend $skin-base
+      .skin-{skin_name}-{variant_name}
         merged_variant = merge({}, skins.default.variants[variant_name], variant)
         unless typeof(merged_variant) == "object"
           {merged_variant}
@@ -144,42 +131,3 @@ for skin_name, skin in skins
       //   merged_attribute = merge({}, skins.default.variants[variant_name]attributes[attribute_name], attribute)
       //   {merged_attribute}
 
-
-.thing-1a
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-primary-light
-.thing-1b
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-primary
-.thing-1c
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-primary-dark
-
-.thing-2a
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-secondary-light
-.thing-2b
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-secondary
-.thing-2c
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-secondary-dark
-
-.thing-3a
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-tertiary-light
-.thing-3b
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-tertiary
-.thing-3c
-  &:before
-    content 'Skin - ' attr(data-skin)
-  @extend $skin-tertiary-dark

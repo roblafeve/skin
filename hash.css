@@ -1,0 +1,53 @@
+.skin-primary {
+  background-color: #800080;
+  border-color: #1a001a;
+  color: #ff80ff;
+  top: 0;
+  position: absolute;
+}
+.skin-primary-alpha {
+  background-color: #e600e6;
+  border-color: #800080;
+  color: #ffe6ff;
+}
+.skin-primary-beta {
+  background-color: #4d004d;
+  border-color: #000;
+  color: #ff4dff;
+}
+.skin-primary-gamma {
+  background-color: #1a001a;
+  border-color: #000;
+  color: #ff1aff;
+}
+.skin-primary-light {
+  background-color: #9a0099;
+  border-color: #340034;
+  color: #ff9afe;
+}
+.skin-primary-dark {
+  background-color: #800080;
+  border-color: #1a001a;
+  color: #ff80ff;
+}
+.skin-secondary {
+  background-color: #ffa500;
+  border-color: #996300;
+  color: #fff;
+  top: 0;
+}
+.skin-secondary-alpha {
+  background-color: #ffc966;
+  border-color: #ffa500;
+  color: #fff;
+}
+.skin-secondary-beta {
+  background-color: #cc8400;
+  border-color: #664200;
+  color: #ffedcc;
+}
+.skin-secondary-gamma {
+  background-color: #996300;
+  border-color: #332100;
+  color: #ffdb99;
+}
