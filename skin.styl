@@ -10,41 +10,48 @@ $skin-base
   border-style      solid
   background-repeat no-repeat
   transition        all 0.25s ease-in-out
+  // background-image: linear-gradient(rgba(white, 0.2), rgba(black, 0.1))
   // background-image  linear-gradient(rgba(white, 0), rgba(black, 0.05))
 
-// SKIN DEFAULT
-// Default skin configuration options are placed in `skin_default`.
-// Unless specified on a specific `skin`, these options are used.
-// THIS ONE WORKS!!! 
-// Figure out how to pass options so that it doesn't break!
 skins = {
+
+  // SKIN DEFAULT
+  // Default skin configuration options are placed in `skin_default`.
+  // Unless specified on a specific `skin`, these options are used.
   default: {
     color_base: whitesmoke
     color_adjust: 0
     border_adjust: -10
-    text_adjust: -10
-    attributes: {
-      top: 0
-    }
+    text_adjust: -40
+
+    // DEFAULT VARIANTS
     variants: {
       light: {
-        text_adjust: -50
-        color_adjust: 20
+        color_adjust: 40
       }
       dark: {
-        color_adjust: -10
+        color_adjust: -5
+        text_adjust: 40
+      }
+    }
+
+  }
+
+  // SKINS
+  primary: {
+    color_base: orange
+  }
+  secondary: {
+    color_base: #333
+  }
+  tertiary: {
+    variants: {
+      dark: {
+        text_adjust: -40
       }
     }
   }
-  primary: {
-    
-  }
-  secondary: {
-    color_base: orange
-  }
-  tertiary: {
-    color_base: #333
-  }
+
 }
 
 for skin_name, skin in skins
@@ -139,10 +146,10 @@ for skin_name, skin in skins
         border-color border_color
         color text_color
 
-      // merged_variant_attributes = merge({}, skins.default.variants[variant_name]attributes, skin.variants[variant_name]attributes)
-      // for attribute_name, attribute in merged_variant_attributes
-      //   merged_attribute = merge({}, skins.default.variants[variant_name]attributes[attribute_name], attribute)
-      //   {merged_attribute}
+        // merged_attributes = merge({}, skins.default.variants[variant_name]attributes, variant.attributes)
+        // for attribute_name, attribute in merged_attributes
+        //   merged_attribute = merge({}, skins.default.variants[variant_name]attributes[attribute_name], attribute)
+        //   {merged_attribute}
 
 
 .thing-1a
